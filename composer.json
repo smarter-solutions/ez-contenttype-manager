@@ -1,0 +1,19 @@
+
+{
+    "name" : "smarter-solutions/ez-contenttype-manager",
+    "description" : " This is a tool that allows maanejar classes eZ Publish from the console",
+    "keywords" : ["ezpublish", "bundle", "contenttype","manager","import","export"],
+    "license" : "MIT",
+    "type" : "symfony-bundle",
+    "minimum-stability": "stable",
+    "require" : {
+    	"php": ">=5.3.0",
+    	"symfony/symfony": ">=2.5",
+    	"ezsystems/ezpublish-kernel": ">=2014.11"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "SmarterSolutions\\EzComponents\\EzContentTypeManagerBundle\\" : ""
+        }
+    }
+}

@@ -1,0 +1,4 @@
+services:
+#    ez_content_type_manager.example:
+#        class: SmarterSolutions\EzComponents\EzContentTypeManagerBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

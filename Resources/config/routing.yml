@@ -1,3 +1,0 @@
-ez_content_type_manager_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: EzContentTypeManagerBundle:Default:index }

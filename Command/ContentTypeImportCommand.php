@@ -2,11 +2,9 @@
 namespace SmarterSolutions\EzComponents\EzContentTypeManagerBundle\Command;
 
 use SmarterSolutions\EzComponents\EzContentTypeManagerBundle\ContentType\Command\ContainerAwareCommand;
-use SmarterSolutions\EzComponents\EzContentTypeManagerBundle\ContentType\Command\Validators;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Command\Command;
 use eZ\Publish\Core\Persistence\Legacy\Exception\TypeNotFound;
 use eZ\Publish\Core\Base\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;

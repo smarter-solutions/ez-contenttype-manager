@@ -1,0 +1,19 @@
+services:
+    smartersolutions.ezcontenttypemanager.base:
+        class: SmarterSolutions\EzComponents\EzContentTypeManagerBundle\ContenType\ContentTypeBase
+        public: false
+        abstract: true
+        arguments:
+            - @ezpublish.api.repository
+    smartersolutions.ezcontenttypemanager.contentype_group:
+        class: SmarterSolutions\EzComponents\EzContentTypeManagerBundle\ContentType\ContentTypeGroup
+        parent: smartersolutions.ezcontenttypemanager.base
+        public: true
+    smartersolutions.ezcontenttypemanager.contentype_create:
+        class: SmarterSolutions\EzComponents\EzContentTypeManagerBundle\ContentType\ContentTypeCreate
+        parent: smartersolutions.ezcontenttypemanager.base
+        public: true
+    smartersolutions.ezcontenttypemanager.contentype_update:
+        class: SmarterSolutions\EzComponents\EzContentTypeManagerBundle\ContentType\ContentTypeUpdate
+        parent: smartersolutions.ezcontenttypemanager.base
+        public: true

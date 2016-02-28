@@ -10,7 +10,7 @@ use eZ\Publish\Core\Base\Exceptions\NotFoundException;
 use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 use eZ\Publish\API\Repository\Exceptions\ForbiddenException;
 use Symfony\Component\Debug\Exception\ContextErrorException;
-use Symfony\Component\Console\Question\Question;
+// use Symfony\Component\Console\Question\Question;
 
 class ContentTypeImportCommand extends ContainerAwareCommand
 {
@@ -60,10 +60,12 @@ EOT
 
     public function interact(InputInterface $input, OutputInterface $output)
     {
-        $questionHelper = $this->getQuestionHelper();
-        $questionHelper->writeSection($output, 'Welcome to import process of content types');
+        $questionHelper = $this->getHelper('dialog');
+        // $questionHelper->writeSection($output, 'Welcome to import process of content types');
 
         $output->writeln(array(
+            '',
+            'Welcome to import process of content types',
             '',
             'This command helps you to import your contentypes easily.',
             '',
@@ -72,21 +74,42 @@ EOT
             '',
         ));
 
+        $file = $input->getOption('config-file');
+
+        $textDefault = !!$file?"[$file]":"";
+
         while (true) {
-            $question = new Question(
-                $questionHelper->getQuestion(
-                    'Config file name',
-                    $input->getOption('config-file')
-                ),
-                $input->getOption('config-file')
+            $shortcut = $questionHelper->askAndValidate(
+                $output,
+                "<question>Config file name $textDefault:</question> ",
+                function ($answer) {
+                    if (!preg_match("/^[a-zA-Z0-9]{1,}Bundle:[a-zA-Z0-9]{1,}$/", $answer)) {
+                        throw new \InvalidArgumentException(
+                            'The configuration file name should be something like AcmeBlogBundle:filename'
+                        );
+                    }
+                    return $answer;
+                },
+                false,
+                $file
             );
-            $question->setValidator(
-                array(
-                    'SmarterSolutions\EzComponents\EzContentTypeManagerBundle\ContentType\Command\Validators',
-                    'validateShortcutNotation'
-                )
-            );
-            $shortcut = $questionHelper->ask($input, $output, $question);
+
+            // $question = new Question(
+            //     $questionHelper->getQuestion(
+            //         'Config file name',
+            //         $input->getOption('config-file')
+            //     ),
+            //     $input->getOption('config-file')
+            // );
+            // $question->setValidator(
+            //     array(
+            //         'SmarterSolutions\EzComponents\EzContentTypeManagerBundle\ContentType\Command\Validators',
+            //         'validateShortcutNotation'
+            //     )
+            // );
+            // $shortcut = $questionHelper->ask($input, $output, $question);
+
+            // var_dump($shortcut);exit;
 
             if ($this->isFileConfig($shortcut)) {
                 break;
